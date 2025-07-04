@@ -1,0 +1,4 @@
+# Ignore at all levels
+
+**/node_modules/
+**/.env
