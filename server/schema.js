@@ -40,10 +40,20 @@ export const typeDefs = `#graphql
     publishedBefore: String
   }
 
+  type AuthorsResult {
+    items: [Author!]!
+    count: Int!
+  }
+  
+  type BooksResult {
+    items: [Book!]!
+    count: Int!
+  }
+
   type Query {
-    authors(limit: Int = 10, offset: Int = 0, filter: AuthorFilter): [Author!]!
+    authors(limit: Int = 10, offset: Int = 0, filter: AuthorFilter): AuthorsResult!
     author(id: ID!): Author
-    books(limit: Int = 10, offset: Int = 0, filter: BookFilter): [Book!]!
+    books(limit: Int = 10, offset: Int = 0, filter: BookFilter): BooksResult!
     book(id: ID!): Book
   }
 

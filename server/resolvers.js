@@ -32,7 +32,7 @@ export const resolvers = {
 					],
 				};
 			}
-			return models.Author.findAll({
+			const { count, rows } = await models.Author.findAndCountAll({
 				where,
 				limit,
 				offset,
@@ -41,6 +41,8 @@ export const resolvers = {
 					as: "books",
 				},
 			});
+
+			return { items: rows, count };
 		},
 		books: async (_, { limit, offset, filter }, { models }) => {
 			const where = {};
@@ -71,7 +73,7 @@ export const resolvers = {
 					where.published_date[Op.gte] = new Date(filter.publishedAfter);
 				}
 			}
-			return models.Book.findAll({
+			const { count, rows } = await models.Book.findAndCountAll({
 				where,
 				include: include.length
 					? include
@@ -82,6 +84,7 @@ export const resolvers = {
 				limit,
 				offset,
 			});
+			return { items: rows, count };
 		},
 	},
 	Mutation: {
