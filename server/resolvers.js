@@ -18,7 +18,7 @@ export const resolvers = {
 				},
 			});
 		},
-		authors: async (_, { limit, offset, filter }) => {
+		authors: async (_, { limit, offset, filter }, { models }) => {
 			const where = {};
 			if (filter.name) {
 				where.name[Op.iLike] = `${filter.name}%`;
@@ -36,7 +36,10 @@ export const resolvers = {
 				where,
 				limit,
 				offset,
-				include: [models.Book],
+				include: {
+					model: models.Book,
+					as: "books",
+				},
 			});
 		},
 		books: async (_, { limit, offset, filter }, { models }) => {
@@ -50,13 +53,13 @@ export const resolvers = {
 			if (filter.authorName) {
 				include.push({
 					model: models.Author,
+					as: "author",
 					where: {
 						name: { [Op.iLike]: `%${filter.authorName}%` },
 					},
 				});
 			}
 
-			// TODO: Try commenting this out
 			if (filter.publishedAfter || filter.publishedBefore) {
 				where.published_date = {};
 
@@ -68,10 +71,14 @@ export const resolvers = {
 					where.published_date[Op.gte] = new Date(filter.publishedAfter);
 				}
 			}
-
 			return models.Book.findAll({
 				where,
-				include: include.length ? include : [Author],
+				include: include.length
+					? include
+					: {
+							model: models.Author,
+							as: "author",
+						},
 				limit,
 				offset,
 			});
