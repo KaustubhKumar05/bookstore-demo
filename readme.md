@@ -21,3 +21,7 @@
 - Initialised a Next.js frontend
 - Set up DB instances on Railway
 - Created models with Sequelize and seeded dummy data
+
+## Day 3
+- Set up CRUD APIs
+- 

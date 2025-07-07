@@ -21,7 +21,7 @@ const server = new ApolloServer({ typeDefs, resolvers });
 
 sequelize.sync().then(async () => {
 	const { url } = await startStandaloneServer(server, {
-		listen: { port: 4000 },
+		listen: { port: process.env.PORT || 4000 },
 		context: async () => ({
 			models: { Author, Book },
 		}),
