@@ -6,7 +6,7 @@ import { useState } from "react";
 import { EditDialog } from "./EditDialog";
 import { DeleteDialog } from "./DeleteDialog";
 import { useMutation } from "@apollo/client";
-import { DELETE_BOOK } from "../queries";
+import { DELETE_BOOK, DELETE_AUTHOR } from "../queries";
 
 export const Actions = ({
 	entry,
@@ -25,14 +25,18 @@ export const Actions = ({
 	const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
 	const [deleteBook] = useMutation(DELETE_BOOK);
+	const [deleteAuthor] = useMutation(DELETE_AUTHOR);
 
 	const handleDelete = async (id: string) => {
 		if (isLastElement) {
 			updatePage();
 		}
-		await deleteBook({ variables: { id } });
+		if (author) {
+			await deleteAuthor({ variables: { id } });
+		} else {
+			await deleteBook({ variables: { id } });
+		}
 		refetch();
-		
 	};
 
 	return (

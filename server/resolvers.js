@@ -44,6 +44,7 @@ export const resolvers = {
 				},
 				distinct: true,
 				col: "id",
+				order: [["id", "ASC"]],
 			});
 
 			return { items: rows, count };
@@ -88,8 +89,9 @@ export const resolvers = {
 						},
 				limit,
 				offset,
+				order: [["id", "ASC"]],
 			});
-			console.log("debug> return", { count });
+
 			return { items: rows, count };
 		},
 	},

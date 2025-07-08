@@ -33,3 +33,9 @@ export const DELETE_BOOK = gql`
 		deleteBook(id: $id)
 	}
 `;
+
+export const DELETE_AUTHOR = gql`
+	mutation DeleteAuthor($id: ID!) {
+		deleteAuthor(id: $id)
+	}
+`;
