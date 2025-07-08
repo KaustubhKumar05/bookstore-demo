@@ -1,16 +1,23 @@
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { ReactNode } from "react";
 
+const width = {
+	md: "w-md",
+	xl: "w-xl",
+};
+
 export const Dialog = ({
 	title,
 	children,
 	open,
 	setOpen,
+	size = "xl",
 }: {
 	title: string;
 	children: ReactNode;
 	open: boolean;
 	setOpen: (state: boolean) => void;
+	size?: "md" | "xl";
 }) => {
 	if (!open) {
 		return <></>;
@@ -22,7 +29,7 @@ export const Dialog = ({
 			onClick={() => setOpen(false)}
 		>
 			<div
-				className="flex flex-col gap-2 w-2xl bg-gray-800 px-4 py-2 rounded-2xl"
+				className={`flex flex-col gap-2 ${width[size]} bg-gray-800 px-6 py-4 rounded-2xl`}
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div className="flex items-center justify-between border-b pb-2 border-gray-500">

@@ -21,11 +21,11 @@ export const InfoDialog = ({
 						className="flex items-center gap-4 my-2 w-full text-sm"
 						key={key}
 					>
-						<span>{formattedKey[key]}</span>
+						<span className="w-40 font-semibold">{formattedKey[key]}</span>
 						<span>{resource[key as keyof (Book | Author)]}</span>
 					</div>
 				))}
-				<div className="flex justify-center items-center w-full">
+				<div className="flex justify-center items-center w-full mt-4">
 					<button
 						className="px-4 py-2 bg-black text-sm font-semibold rounded cursor-pointer hover:opacity-90"
 						onClick={() => setOpen(false)}

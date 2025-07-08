@@ -24,4 +24,10 @@
 
 ## Day 3
 - Set up CRUD APIs
-- 
+- Built list views with toggle and pagination
+
+## Day 4
+- Dialogs for adding, viewing, editing and deleting entries
+- UI for filters
+- Added more sample data
+
