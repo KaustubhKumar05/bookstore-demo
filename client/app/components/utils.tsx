@@ -10,4 +10,13 @@ export const formattedKey: Record<string, string> = {
 	title: "Title",
 	biography: "Biography",
 	description: "Description",
+	authorName: "Author Name",
+	publishedAfter: "Published After",
+	publishedBefore: "Published Before",
+	birthYear: "Birth Year",
+};
+
+export const LIST_CONFIG = {
+	LIMIT: 5,
+	OFFSET: 0,
 };

@@ -1,35 +1,41 @@
 "use client";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHORS, GET_BOOKS } from "../queries";
-import { Author, Book, ResourceType } from "../types";
+import { Author, Book, FilterTypes, ResourceType } from "../types";
 import { useEffect, useState } from "react";
 import { Pagination } from "./Pagination";
 import { ResourceEntry } from "./ResourceEntry";
+import { LIST_CONFIG } from "./utils";
 
-const CONFIG = {
-	LIMIT: 5,
-	OFFSET: 0,
-};
-
-export const List = ({ resourceType }: { resourceType: ResourceType }) => {
+export const List = ({
+	resourceType,
+	filters,
+}: {
+	resourceType: ResourceType;
+	filters: FilterTypes;
+}) => {
 	const isAuthor = resourceType === "author";
 	const [page, setPage] = useState(1);
 
-	const { data, loading, error } = useQuery(
+	const { data, loading, error, refetch } = useQuery(
 		isAuthor ? GET_AUTHORS : GET_BOOKS,
 		{
 			variables: {
-				limit: CONFIG.LIMIT,
-				offset: (page - 1) * CONFIG.LIMIT,
-				filter: {},
+				limit: LIST_CONFIG.LIMIT,
+				offset: (page - 1) * LIST_CONFIG.LIMIT,
+				filter: filters[resourceType],
 			},
+			fetchPolicy: "cache-and-network",
 		}
 	);
+
+	const listData = data?.[resourceType + "s"];
+
 	console.log("debug>", { data, loading, error });
 
 	useEffect(() => {
 		setPage(1);
-	}, [resourceType]);
+	}, [resourceType, filters]);
 
 	if (error) {
 		return <p>Error: {error.message}</p>;
@@ -41,17 +47,23 @@ export const List = ({ resourceType }: { resourceType: ResourceType }) => {
 	return (
 		<div className="max-w-3xl flex flex-col gap-4">
 			<div>
-				{data[resourceType + "s"].items.map((resource: Author | Book) => (
-					<ResourceEntry key={resource.id + resourceType} resource={resource} />
+				{listData.items.map((resource: Author | Book) => (
+					<ResourceEntry
+						key={resource.id + resourceType}
+						resource={resource}
+						refetch={refetch}
+						isLastElement={listData.items.length === 1}
+						updatePage={() => setPage(Math.max(1, page - 1))}
+					/>
 				))}
 			</div>
 
 			<Pagination
-				totalCount={data[resourceType + "s"].count}
+				totalCount={listData.count}
 				page={page}
 				setPage={(num: number) => setPage(num)}
 				hide={loading}
-				entriesPerPage={CONFIG.LIMIT}
+				entriesPerPage={LIST_CONFIG.LIMIT}
 			/>
 		</div>
 	);

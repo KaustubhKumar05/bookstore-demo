@@ -27,3 +27,9 @@ export const GET_BOOKS = gql`
 		}
 	}
 `;
+
+export const DELETE_BOOK = gql`
+	mutation DeleteBook($id: ID!) {
+		deleteBook(id: $id)
+	}
+`;

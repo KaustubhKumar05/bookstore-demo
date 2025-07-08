@@ -17,7 +17,7 @@ export const Pagination = ({
 		},
 		(_, index) => index
 	);
-	console.log({ totalCount, page, pages });
+
 	return (
 		<div
 			className={`flex gap-2 justify-center ${

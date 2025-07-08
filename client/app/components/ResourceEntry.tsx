@@ -1,8 +1,18 @@
 import { Author, Book } from "../types";
-import { EntryActions } from "./Actions";
+import { Actions } from "./Actions";
 import { isAuthor } from "./utils";
 
-export const ResourceEntry = ({ resource }: { resource: Author | Book }) => {
+export const ResourceEntry = ({
+	resource,
+	refetch,
+	isLastElement,
+	updatePage,
+}: {
+	resource: Author | Book;
+	refetch: () => void;
+	isLastElement: boolean;
+	updatePage: () => void;
+}) => {
 	const author = isAuthor(resource);
 	return (
 		<div
@@ -18,7 +28,12 @@ export const ResourceEntry = ({ resource }: { resource: Author | Book }) => {
 					{author ? resource.biography : resource.description}
 				</p>
 			</div>
-			<EntryActions entry={resource} />
+			<Actions
+				entry={resource}
+				refetch={refetch}
+				isLastElement={isLastElement}
+				updatePage={updatePage}
+			/>
 		</div>
 	);
 };

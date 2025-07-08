@@ -30,7 +30,7 @@ export const typeDefs = `#graphql
 
   input AuthorFilter {
     name: String
-    bornYear: Int
+    birthYear: Int
   }
 
   input BookFilter {

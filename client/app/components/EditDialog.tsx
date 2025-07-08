@@ -22,7 +22,7 @@ export const EditDialog = ({
 			<div className="flex flex-col">
 				{Object.keys(resource).map((key) => (
 					<div className="flex flex-col gap-1 my-2 w-full text-sm" key={key}>
-						<span className="w-40">{formattedKey[key]}</span>
+						<span className="w-40 font-semibold">{formattedKey[key]}</span>
 						{key === "description" ? (
 							<textarea
 								value={formData[key as keyof (Book | Author)]}
@@ -36,7 +36,7 @@ export const EditDialog = ({
 						) : (
 							<input
 								disabled={key === "id"}
-								className="border-2 rounded px-2 py-1 disabled:border-0 w-full"
+								className="border-2 rounded px-2 py-2 disabled:border-0 w-full"
 								type={key.toLowerCase().includes("date") ? "date" : "text"}
 								required
 								value={formData[key as keyof (Book | Author)]}

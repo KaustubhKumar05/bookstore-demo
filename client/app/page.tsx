@@ -1,9 +1,10 @@
 "use client";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { List } from "./components/List";
-import { ResourceType } from "./types";
+import { FilterTypes, ResourceType } from "./types";
 import { useState } from "react";
 import { Tab } from "./components/Tab";
+import { Filter } from "./components/Filter";
 
 export default function App() {
 	const client = new ApolloClient({
@@ -12,6 +13,15 @@ export default function App() {
 	});
 
 	const [selection, setSelection] = useState<ResourceType>("author");
+	const [filters, setFilters] = useState<FilterTypes>({
+		author: { name: "", birthYear: undefined },
+		book: {
+			title: "",
+			authorName: "",
+			publishedAfter: undefined,
+			publishedBefore: undefined,
+		},
+	});
 
 	return (
 		<ApolloProvider client={client}>
@@ -22,7 +32,12 @@ export default function App() {
 						currentValue={selection}
 						options={["author", "book"]}
 					/>
-					<List resourceType={selection} />
+					<Filter
+						filters={filters}
+						setFilters={setFilters}
+						resourceType={selection}
+					/>
+					<List resourceType={selection} filters={filters} />
 				</main>
 			</div>
 		</ApolloProvider>

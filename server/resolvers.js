@@ -20,8 +20,9 @@ export const resolvers = {
 		},
 		authors: async (_, { limit, offset, filter }, { models }) => {
 			const where = {};
+			console.log({ filter });
 			if (filter.name) {
-				where.name[Op.iLike] = `${filter.name}%`;
+				where.name = { [Op.iLike]: `%${filter.name}%` };
 			}
 
 			if (filter.birthYear) {
@@ -52,7 +53,7 @@ export const resolvers = {
 			const include = [];
 
 			if (filter.title) {
-				where.title[Op.iLike] = `%${filter.title}%`;
+				where.title = { [Op.iLike]: `%${filter.title}%` };
 			}
 
 			if (filter.authorName) {
@@ -88,6 +89,7 @@ export const resolvers = {
 				limit,
 				offset,
 			});
+			console.log("debug> return", { count });
 			return { items: rows, count };
 		},
 	},
@@ -145,6 +147,7 @@ export const resolvers = {
 				throw new Error("Book not found");
 			}
 			await book.destroy();
+			console.log("debug> deleted");
 			return true;
 		},
 	},

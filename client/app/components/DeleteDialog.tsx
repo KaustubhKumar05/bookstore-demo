@@ -7,11 +7,13 @@ export const DeleteDialog = ({
 	open,
 	setOpen,
 	title,
+	onConfirm,
 }: {
 	resource: Book | Author;
 	open: boolean;
 	setOpen: (state: boolean) => void;
 	title: string;
+	onConfirm: () => void;
 }) => {
 	const author = isAuthor(resource);
 	return (
@@ -31,7 +33,10 @@ export const DeleteDialog = ({
 					</button>
 					<button
 						className="px-4 py-2 bg-red-500 text-sm"
-						onClick={() => setOpen(false)}
+						onClick={() => {
+							onConfirm();
+							setOpen(false);
+						}}
 					>
 						Delete
 					</button>

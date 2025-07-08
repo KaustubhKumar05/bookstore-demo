@@ -5,25 +5,43 @@ import { InfoDialog } from "./InfoDialog";
 import { useState } from "react";
 import { EditDialog } from "./EditDialog";
 import { DeleteDialog } from "./DeleteDialog";
+import { useMutation } from "@apollo/client";
+import { DELETE_BOOK } from "../queries";
 
-export const EntryActions = ({ entry }: { entry: Author | Book }) => {
+export const Actions = ({
+	entry,
+	refetch,
+	isLastElement,
+	updatePage,
+}: {
+	entry: Author | Book;
+	refetch: () => void;
+	isLastElement: boolean;
+	updatePage: () => void;
+}) => {
 	const author = isAuthor(entry);
 	const [showInfo, setShowInfo] = useState(false);
 	const [showEditForm, setShowEditForm] = useState(false);
 	const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
+	const [deleteBook] = useMutation(DELETE_BOOK);
+
+	const handleDelete = async (id: string) => {
+		if (isLastElement) {
+			updatePage();
+		}
+		await deleteBook({ variables: { id } });
+		refetch();
+		
+	};
+
 	return (
 		<>
 			<div className="ml-auto flex gap-4">
-				<button
-					className="p-2 bg-black"
-					onClick={() => setShowInfo(true)}
-				>
+				<button className="p-2 bg-black" onClick={() => setShowInfo(true)}>
 					<InfoCircledIcon />
 				</button>
-				<button
-					className="p-2 bg-black"
-					onClick={() => setShowEditForm(true)}
-				>
+				<button className="p-2 bg-black" onClick={() => setShowEditForm(true)}>
 					<Pencil2Icon />
 				</button>
 				<button
@@ -51,6 +69,7 @@ export const EntryActions = ({ entry }: { entry: Author | Book }) => {
 				resource={entry}
 				open={showDeleteConfirmation}
 				setOpen={setShowDeleteConfirmation}
+				onConfirm={() => handleDelete(entry.id)}
 			/>
 		</>
 	);
