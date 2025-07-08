@@ -7,6 +7,7 @@ export const formattedKey: Record<string, string> = {
 	bornDate: "Date of Birth",
 	publishedDate: "Published Date",
 	name: "Name",
+	title: "Title",
 	biography: "Biography",
 	description: "Description",
 };

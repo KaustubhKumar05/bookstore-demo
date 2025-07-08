@@ -21,21 +21,30 @@ export const EditDialog = ({
 		<Dialog title={title} open={open} setOpen={setOpen}>
 			<div className="flex flex-col">
 				{Object.keys(resource).map((key) => (
-					<div
-						className="flex items-center gap-4 my-2 w-full text-sm"
-						key={key}
-					>
+					<div className="flex flex-col gap-1 my-2 w-full text-sm" key={key}>
 						<span className="w-40">{formattedKey[key]}</span>
-						<input
-							disabled={key === "id"}
-							className="border rounded px-2 py-1 disabled:border-0 w-full"
-							type="text"
-							required
-							value={formData[key as keyof (Book | Author)]}
-							onChange={(e) => {
-								setFormData((prev) => ({ ...prev, [key]: e.target.value }));
-							}}
-						/>
+						{key === "description" ? (
+							<textarea
+								value={formData[key as keyof (Book | Author)]}
+								required
+								rows={4}
+								className="resize-none border-2 rounded px-2 py-1"
+								onChange={(e) => {
+									setFormData((prev) => ({ ...prev, [key]: e.target.value }));
+								}}
+							/>
+						) : (
+							<input
+								disabled={key === "id"}
+								className="border-2 rounded px-2 py-1 disabled:border-0 w-full"
+								type={key.toLowerCase().includes("date") ? "date" : "text"}
+								required
+								value={formData[key as keyof (Book | Author)]}
+								onChange={(e) => {
+									setFormData((prev) => ({ ...prev, [key]: e.target.value }));
+								}}
+							/>
+						)}
 					</div>
 				))}
 				<div className="flex justify-center gap-8 mt-4 items-center w-full">

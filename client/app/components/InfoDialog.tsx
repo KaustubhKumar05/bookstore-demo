@@ -17,10 +17,7 @@ export const InfoDialog = ({
 		<Dialog title={title} open={open} setOpen={setOpen}>
 			<div className="flex flex-col">
 				{Object.keys(resource).map((key) => (
-					<div
-						className="flex items-center gap-4 my-2 w-full text-sm"
-						key={key}
-					>
+					<div className="flex flex-col gap-1 my-2 w-full text-sm" key={key}>
 						<span className="w-40 font-semibold">{formattedKey[key]}</span>
 						<span>{resource[key as keyof (Book | Author)]}</span>
 					</div>

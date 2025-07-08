@@ -36,6 +36,7 @@ export const resolvers = {
 				where,
 				limit,
 				offset,
+				// TODO: should not be the default
 				include: {
 					model: models.Book,
 					as: "books",
@@ -77,6 +78,7 @@ export const resolvers = {
 			}
 			const { count, rows } = await models.Book.findAndCountAll({
 				where,
+				// TODO: should not be the default
 				include: include.length
 					? include
 					: {
