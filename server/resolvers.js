@@ -40,6 +40,8 @@ export const resolvers = {
 					model: models.Book,
 					as: "books",
 				},
+				distinct: true,
+				col: "id",
 			});
 
 			return { items: rows, count };

@@ -15,16 +15,6 @@ export const ResourceEntry = ({ resource }: { resource: Author | Book }) => {
 					{author ? resource?.name : resource.title}
 				</p>
 				<p className="text-sm">
-					{author ? "Born: " : "Published: "}
-					{new Date(
-						author ? resource.bornDate : resource.publishedDate
-					).toLocaleDateString("en-GB", {
-						day: "numeric",
-						month: "long",
-						year: "numeric",
-					})}
-				</p>
-				<p className="text-sm">
 					{author ? resource.biography : resource.description}
 				</p>
 			</div>
