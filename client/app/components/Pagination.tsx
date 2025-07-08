@@ -1,19 +1,19 @@
 export const Pagination = ({
 	page,
 	setPage,
-	itemsPerPage,
+	entriesPerPage,
 	totalCount,
 	hide = false,
 }: {
 	totalCount: number;
 	page: number;
-	itemsPerPage: number;
+	entriesPerPage: number;
 	setPage: (num: number) => void;
 	hide: boolean;
 }) => {
 	const pages: number[] = Array.from(
 		{
-			length: Math.ceil(totalCount / itemsPerPage),
+			length: Math.ceil(totalCount / entriesPerPage),
 		},
 		(_, index) => index
 	);

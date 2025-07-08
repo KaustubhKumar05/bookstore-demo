@@ -6,10 +6,9 @@ import { useState } from "react";
 import { Tab } from "./components/Tab";
 
 export default function App() {
-	console.log("debug>", process.env.NEXT_PUBLIC_BACKEND_URL);
 	const client = new ApolloClient({
 		uri: process.env.NEXT_PUBLIC_BACKEND_URL,
-		cache: new InMemoryCache(),
+		cache: new InMemoryCache({ addTypename: false }),
 	});
 
 	const [selection, setSelection] = useState<ResourceType>("author");
