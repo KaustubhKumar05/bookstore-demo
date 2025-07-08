@@ -15,19 +15,19 @@ export const EntryActions = ({ entry }: { entry: Author | Book }) => {
 		<>
 			<div className="ml-auto flex gap-4">
 				<button
-					className="p-2 rounded bg-black cursor-pointer hover:opacity-90"
+					className="p-2 bg-black"
 					onClick={() => setShowInfo(true)}
 				>
 					<InfoCircledIcon />
 				</button>
 				<button
-					className="p-2 rounded bg-black cursor-pointer hover:opacity-90"
+					className="p-2 bg-black"
 					onClick={() => setShowEditForm(true)}
 				>
 					<Pencil2Icon />
 				</button>
 				<button
-					className="p-2 rounded bg-red-500 cursor-pointer hover:opacity-90"
+					className="p-2 bg-red-500"
 					onClick={() => setShowDeleteConfirmation(true)}
 				>
 					<TrashIcon strokeWidth={24} />

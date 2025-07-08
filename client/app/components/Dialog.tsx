@@ -35,7 +35,7 @@ export const Dialog = ({
 				<div className="flex items-center justify-between border-b pb-2 border-gray-500">
 					<h2 className="text-lg font-semibold">{title}</h2>
 					<button
-						className="cursor-pointer p-1 hover:opacity-90"
+						className="p-1"
 						onClick={() => setOpen(false)}
 					>
 						<Cross1Icon />

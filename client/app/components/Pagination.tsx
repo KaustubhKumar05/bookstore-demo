@@ -27,9 +27,9 @@ export const Pagination = ({
 			{pages.map((index) => (
 				<button
 					key={index}
-					className={`px-3 rounded py-1 font-bold ${
+					className={`px-3 py-1 font-bold ${
 						page === index + 1 ? "bg-gray-900" : "bg-gray-800"
-					} tabular-nums cursor-pointer hover:opacity-90`}
+					} tabular-nums`}
 					onClick={() => setPage(index + 1)}
 				>
 					{index + 1}

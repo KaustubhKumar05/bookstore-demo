@@ -24,13 +24,13 @@ export const DeleteDialog = ({
 				</h3>
 				<div className="flex justify-center gap-8 items-center w-full mt-4">
 					<button
-						className="px-4 py-2 bg-black text-sm font-semibold rounded cursor-pointer hover:opacity-90"
+						className="px-4 py-2 bg-black text-sm"
 						onClick={() => setOpen(false)}
 					>
 						Cancel
 					</button>
 					<button
-						className="px-4 py-2 bg-red-500 text-sm font-semibold rounded cursor-pointer hover:opacity-90"
+						className="px-4 py-2 bg-red-500 text-sm"
 						onClick={() => setOpen(false)}
 					>
 						Delete
