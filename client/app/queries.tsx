@@ -60,3 +60,15 @@ export const UPDATE_BOOK = gql`
 		}
 	}
 `;
+
+// TODO: pass count to remove limit hardcoding
+export const GET_AUTHOR_LIST = gql`
+	query GetAuthorList {
+		authors(limit: 1000, offset: 0, filter: {}) {
+			items {
+				id
+				name
+			}
+		}
+	}
+`;

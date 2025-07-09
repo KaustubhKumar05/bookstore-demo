@@ -47,6 +47,8 @@ export const resolvers = {
 				order: [["id", "ASC"]],
 			});
 
+			console.log({ rows, count });
+
 			return { items: rows, count };
 		},
 		books: async (_, { limit, offset, filter }, { models }) => {

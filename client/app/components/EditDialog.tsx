@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Author, Book } from "../types";
+import { Author, Book, DropdownOption } from "../types";
 import { Dialog } from "./Dialog";
 import { allowUpdate, formattedKey, isAuthor } from "./utils";
-import { useMutation } from "@apollo/client";
-import { UPDATE_AUTHOR, UPDATE_BOOK } from "../queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_AUTHOR_LIST, UPDATE_AUTHOR, UPDATE_BOOK } from "../queries";
+import { DropdownSelector } from "./DropdownSelector";
 
 export const EditDialog = ({
 	resource,
@@ -22,10 +23,6 @@ export const EditDialog = ({
 	const [enableSubmit, setEnableSubmit] = useState(false);
 	const [formData, setFormData] = useState(resource);
 
-	useEffect(() => {
-		setEnableSubmit(allowUpdate(resource, formData));
-	}, [resource, formData]);
-
 	const [updateAuthor] = useMutation(UPDATE_AUTHOR);
 	const [updateBook] = useMutation(UPDATE_BOOK);
 
@@ -41,11 +38,47 @@ export const EditDialog = ({
 		onConfirm();
 	};
 
+	const { data } = useQuery(GET_AUTHOR_LIST, {
+		fetchPolicy: "cache-and-network",
+		skip: author,
+	});
+
+	const authorOptions: DropdownOption[] = data?.authors?.items?.map(
+		(item: Author) => ({
+			value: item.name,
+			id: item.id,
+		})
+	);
+
+	useEffect(() => {
+		setEnableSubmit(allowUpdate(resource, formData));
+	}, [resource, formData]);
+
 	return (
 		<Dialog title={title} open={open} setOpen={setOpen}>
 			<div className="flex flex-col">
+				{!author ? (
+					<div>
+						<span className="w-40 font-semibold">Author</span>
+						<DropdownSelector
+							defaultValue={authorOptions?.find(
+								(assignedAuthor) =>
+									assignedAuthor.id === (formData as Book).authorId
+							)}
+							options={authorOptions}
+							onSelect={(selectedOption) =>
+								setFormData((prev) => ({
+									...prev,
+									authorId: selectedOption.id,
+								}))
+							}
+						/>
+					</div>
+				) : (
+					<></>
+				)}
 				{Object.keys(resource)
-					.filter((key) => key !== "id")
+					.filter((key) => !key.toLowerCase().includes("id"))
 					.map((key) => (
 						<div className="flex flex-col gap-1 my-2 w-full text-sm" key={key}>
 							<span className="w-40 font-semibold">{formattedKey[key]}</span>

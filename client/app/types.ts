@@ -25,5 +25,10 @@ export type Book = {
 	title: string;
 	description: string;
 	publishedDate: Date;
-	authorId?: string
+	authorId?: string;
+};
+
+export type DropdownOption = {
+	value: string;
+	id: string;
 };
