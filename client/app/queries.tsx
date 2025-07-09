@@ -80,3 +80,11 @@ export const CREATE_AUTHOR = gql`
 		}
 	}
 `;
+
+export const CREATE_BOOK = gql`
+	mutation CreateBook($input: BookInput!) {
+		createBook(input: $input) {
+			id
+		}
+	}
+`;

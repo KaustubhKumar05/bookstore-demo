@@ -44,8 +44,12 @@ export const List = ({
 		return <p>Loading...</p>;
 	}
 
+	if (!loading && !error && listData.items.length === 0) {
+		return <p className="font-semibold text-red-500">No results to display</p>;
+	}
+
 	return (
-		<div className="max-w-3xl flex flex-col gap-4">
+		<div className="max-w-3xl w-3xl flex flex-col gap-4">
 			<div>
 				{listData.items.map((resource: Author | Book) => (
 					<ResourceEntry

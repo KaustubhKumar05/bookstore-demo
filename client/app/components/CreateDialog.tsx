@@ -5,7 +5,7 @@ import { allowCreation, DEFAULTS, formattedKey } from "./utils";
 import { useAuthorList } from "../hooks/useAuthorList";
 import { DropdownSelector } from "./DropdownSelector";
 import { useMutation } from "@apollo/client";
-import { CREATE_AUTHOR } from "../queries";
+import { CREATE_AUTHOR, CREATE_BOOK } from "../queries";
 
 export const CreateDialog = ({
 	resourceType,
@@ -19,8 +19,9 @@ export const CreateDialog = ({
 	onConfirm: () => void;
 }) => {
 	const [formData, setFormData] = useState(DEFAULTS[resourceType]);
-
 	const [enableSubmit, setEnableSubmit] = useState(false);
+
+	const isAuthor = resourceType === "author";
 
 	useEffect(() => {
 		setFormData(DEFAULTS[resourceType]);
@@ -31,8 +32,18 @@ export const CreateDialog = ({
 	}, [formData]);
 
 	const [createAuthor] = useMutation(CREATE_AUTHOR);
+	const [createBook] = useMutation(CREATE_BOOK);
 
-	const { authorOptions } = useAuthorList(resourceType === "author");
+	const { authorOptions } = useAuthorList(isAuthor);
+
+	const handleCreation = async () => {
+		if (isAuthor) {
+			await createAuthor({ variables: { input: formData } });
+		} else {
+			await createBook({ variables: { input: formData } });
+		}
+		onConfirm();
+	};
 
 	return (
 		<Dialog title={`Add new ${resourceType}`} open={open} setOpen={setOpen}>
@@ -73,8 +84,7 @@ export const CreateDialog = ({
 					<button
 						className="px-4 py-2 bg-gray-700 text-sm disabled:opacity-80"
 						onClick={async () => {
-							await createAuthor({ variables: { input: formData } });
-							onConfirm();
+							await handleCreation();
 							setOpen(false);
 						}}
 						disabled={!enableSubmit}

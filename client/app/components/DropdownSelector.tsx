@@ -6,11 +6,13 @@ export const DropdownSelector = ({
 	defaultValue,
 	onSelect,
 	name,
+	placeholder = "Select a value",
 }: {
 	options: DropdownOption[];
 	defaultValue?: DropdownOption;
 	onSelect: (option: DropdownOption) => void;
 	name: string;
+	placeholder?: string;
 }) => {
 	const [selection, setSelection] = useState<DropdownOption | undefined>(
 		defaultValue
@@ -19,6 +21,7 @@ export const DropdownSelector = ({
 	const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const selectedOption =
 			options.find((opt) => opt.value === e.target.value) || defaultValue;
+		console.log({ defaultValue });
 		if (selectedOption) {
 			setSelection(selectedOption);
 			onSelect(selectedOption);
@@ -33,6 +36,11 @@ export const DropdownSelector = ({
 				value={selection?.value}
 				onChange={handleChange}
 			>
+				{!defaultValue && (
+					<option value="" disabled>
+						{placeholder}
+					</option>
+				)}
 				{options?.map((option) => (
 					<option
 						className="bg-gray-700 cursor-pointer"

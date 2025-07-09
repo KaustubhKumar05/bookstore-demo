@@ -17,6 +17,7 @@ export const Pagination = ({
 		},
 		(_, index) => index
 	);
+	if (pages.length === 1) return <></>;
 
 	return (
 		<div

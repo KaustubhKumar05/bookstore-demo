@@ -47,8 +47,6 @@ export const resolvers = {
 				order: [["id", "ASC"]],
 			});
 
-			console.log({ rows, count });
-
 			return { items: rows, count };
 		},
 		books: async (_, { limit, offset, filter }, { models }) => {
@@ -101,7 +99,7 @@ export const resolvers = {
 			return await models.Author.create({
 				name: input.name,
 				biography: input.biography,
-				born_Date: input.bornDate,
+				born_date: input.bornDate,
 			});
 		},
 		updateAuthor: async (_, { id, input }, { models }) => {
