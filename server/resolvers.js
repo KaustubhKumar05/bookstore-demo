@@ -1,4 +1,5 @@
 import { Op } from "sequelize";
+import { Review } from "./models/Review.js";
 
 export const resolvers = {
 	Query: {
@@ -93,6 +94,10 @@ export const resolvers = {
 
 			return { items: rows, count };
 		},
+
+		reviews: async (_, { bookId }) => {
+			return await Review.find({ bookId });
+		},
 	},
 	Mutation: {
 		createAuthor: async (_, { input }, { models }) => {
@@ -161,7 +166,10 @@ export const resolvers = {
 		author: async (book) => {
 			return await book.getAuthor();
 		},
-		authorId: async (book) => book.author_id,
+		authorId: (book) => book.author_id,
 		publishedDate: (book) => book.published_date?.toISOString().split("T")[0],
+	},
+	Review: {
+		reviewText: (review) => review.review_text,
 	},
 };

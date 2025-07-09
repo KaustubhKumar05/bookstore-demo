@@ -5,6 +5,7 @@ import { ApolloServer } from "@apollo/server";
 import { typeDefs } from "./schema.js";
 import { resolvers } from "./resolvers.js";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import mongoose from "mongoose";
 
 const sequelize = new Sequelize(process.env.PG_CONNECTION_URL);
 
@@ -16,6 +17,19 @@ try {
 }
 
 const { Book, Author } = initModels(sequelize);
+
+mongoose.connect(process.env.MONGO_CONNECTION_URL, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+});
+
+mongoose.connection.on("connected", () => {
+	console.log("Connected to MongoDB server");
+});
+
+mongoose.connection.on("error", (err) => {
+	console.error("MongoDB connection error:", err);
+});
 
 const server = new ApolloServer({ typeDefs, resolvers });
 

@@ -51,11 +51,19 @@ export const typeDefs = `#graphql
     count: Int!
   }
 
+  type Review {
+    id: ID!
+    reviewText: String!
+    username: String!
+    bookId: ID!
+  }
+
   type Query {
     authors(limit: Int = 10, offset: Int = 0, filter: AuthorFilter): AuthorsResult!
     author(id: ID!): Author
     books(limit: Int = 10, offset: Int = 0, filter: BookFilter): BooksResult!
     book(id: ID!): Book
+    reviews(bookId: ID!): [Review]
   }
 
   type Mutation {

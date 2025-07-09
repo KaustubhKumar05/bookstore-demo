@@ -43,6 +43,5 @@
 - Polish
     - Clear filters
     - Hide pagination if there's only 1 page, UI for no matching records
-    - Do not include by default
-    - Icons
 - MongoDB for reviews
+

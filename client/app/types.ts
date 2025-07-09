@@ -28,6 +28,13 @@ export type Book = {
 	authorId?: string;
 };
 
+export type Review = {
+	id: string;
+	reviewText: string;
+	username: string;
+	bookId: string;
+};
+
 export type DropdownOption = {
 	value: string;
 	id: string;

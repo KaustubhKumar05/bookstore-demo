@@ -33,7 +33,7 @@ export const Filter = ({
 			filters[resourceType][key as keyof (typeof filters)[typeof resourceType]]
 	);
 	return (
-		<div className="flex flex-col md:flex-row items-center w-full justify-center gap-4">
+		<div className="flex flex-col md:flex-row items-center md:items-end w-full justify-center gap-4">
 			{Object.keys(filters[resourceType]).map((filter) => (
 				<div className="flex flex-col w-full md:max-w-1/4 gap-1" key={filter}>
 					<label className="font-semibold text-sm">
@@ -71,7 +71,8 @@ export const Filter = ({
 			))}
 			{!noFiltersApplied && (
 				<button
-					className="bg-gray-800 p-2"
+					title="Clear filters"
+					className="bg-gray-900 p-1.5"
 					style={{ borderRadius: "100%" }}
 					onClick={() => setFilters(cloneDeep(DEFAULT_FILTERS))}
 				>

@@ -88,3 +88,13 @@ export const CREATE_BOOK = gql`
 		}
 	}
 `;
+
+export const GET_REVIEWS = gql`
+	query GetReviews($bookId: ID!) {
+		reviews(bookId: $bookId) {
+			id
+			reviewText
+			username
+		}
+	}
+`
