@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { Author, Book } from "../types";
 import { Dialog } from "./Dialog";
-import { formattedKey, isAuthor } from "./utils";
+import { formattedKey, isAuthor } from "../utils";
 import { GET_AUTHOR, GET_REVIEWS } from "../queries";
 import { Reviews } from "./Reviews";
 

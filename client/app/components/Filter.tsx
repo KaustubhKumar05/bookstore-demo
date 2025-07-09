@@ -1,6 +1,6 @@
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { FilterTypes, ResourceType } from "../types";
-import { DEFAULT_FILTERS, formattedKey } from "./utils";
+import { DEFAULT_FILTERS, formattedKey } from "../utils";
 import { cloneDeep } from "lodash";
 
 const FilterConfig: Record<

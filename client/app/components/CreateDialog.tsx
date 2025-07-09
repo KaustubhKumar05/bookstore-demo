@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DraftAuthor, DraftBook, ResourceType } from "../types";
 import { Dialog } from "./Dialog";
-import { allowCreation, DEFAULTS, formattedKey } from "./utils";
+import { allowCreation, DEFAULTS, formattedKey } from "../utils";
 import { useAuthorList } from "../hooks/useAuthorList";
 import { DropdownSelector } from "./DropdownSelector";
 import { useMutation } from "@apollo/client";

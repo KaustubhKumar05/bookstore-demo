@@ -42,6 +42,12 @@
     - Handle author name using a select
 - Polish
     - Clear filters
-    - Hide pagination if there's only 1 page, UI for no matching records
-- MongoDB for reviews
+    - Hide pagination if there's only 1 page, no results state
+    - UI layout
+- MongoDB for book reviews
+
+## Day 6
+- Authentication
+- Hosting
+- Unit tests
 

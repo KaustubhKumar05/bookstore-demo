@@ -5,7 +5,7 @@ import { FilterTypes, ResourceType } from "./types";
 import { useState } from "react";
 import { Tab } from "./components/Tab";
 import { Filter } from "./components/Filter";
-import { DEFAULT_FILTERS } from "./components/utils";
+import { DEFAULT_FILTERS } from "./utils";
 import { NewEntry } from "./components/NewEntry";
 
 export default function App() {

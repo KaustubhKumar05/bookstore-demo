@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Author, Book } from "../types";
 import { Dialog } from "./Dialog";
-import { allowUpdate, formattedKey, isAuthor } from "./utils";
+import { allowUpdate, formattedKey, isAuthor } from "../utils";
 import { useMutation } from "@apollo/client";
 import { UPDATE_AUTHOR, UPDATE_BOOK } from "../queries";
 import { DropdownSelector } from "./DropdownSelector";

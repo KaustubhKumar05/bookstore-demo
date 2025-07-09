@@ -1,6 +1,6 @@
 import { Author, Book } from "../types";
 import { Dialog } from "./Dialog";
-import { isAuthor } from "./utils";
+import { isAuthor } from "../utils";
 
 export const DeleteDialog = ({
 	resource,

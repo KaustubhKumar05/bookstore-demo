@@ -5,7 +5,7 @@ import { Author, Book, FilterTypes, ResourceType } from "../types";
 import { useEffect, useState } from "react";
 import { Pagination } from "./Pagination";
 import { ResourceEntry } from "./ResourceEntry";
-import { LIST_CONFIG } from "./utils";
+import { LIST_CONFIG } from "../utils";
 
 export const List = ({
 	selection,

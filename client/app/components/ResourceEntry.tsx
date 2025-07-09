@@ -1,6 +1,6 @@
 import { Author, Book } from "../types";
 import { Actions } from "./Actions";
-import { isAuthor } from "./utils";
+import { isAuthor } from "../utils";
 
 export const ResourceEntry = ({
 	resource,
@@ -20,7 +20,7 @@ export const ResourceEntry = ({
 				<p className="font-bold">{resource.id}</p>
 				<div>
 					<p className="font-semibold text-lg">
-						{author ? resource?.name : resource.title}
+						{author ? resource.name : resource.title}
 					</p>
 					<p className="">
 						{author ? resource.biography : resource.description}
