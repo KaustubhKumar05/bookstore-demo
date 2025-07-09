@@ -5,10 +5,12 @@ export const DropdownSelector = ({
 	options,
 	defaultValue,
 	onSelect,
+	name,
 }: {
 	options: DropdownOption[];
 	defaultValue?: DropdownOption;
 	onSelect: (option: DropdownOption) => void;
+	name: string;
 }) => {
 	const [selection, setSelection] = useState<DropdownOption | undefined>(
 		defaultValue
@@ -26,11 +28,12 @@ export const DropdownSelector = ({
 	return (
 		<div>
 			<select
+				name={name}
 				className="px-2 py-1 rounded border-2 focus:outline-none cursor-pointer hover:opacity-90"
 				value={selection?.value}
 				onChange={handleChange}
 			>
-				{options.map((option) => (
+				{options?.map((option) => (
 					<option
 						className="bg-gray-700 cursor-pointer"
 						key={option.value}

@@ -1,4 +1,4 @@
-import { Author, Book } from "../types";
+import { Author, Book, DraftAuthor, DraftBook, ResourceType } from "../types";
 import { isEqual } from "lodash";
 
 export const isAuthor = (resource: Book | Author) => "name" in resource;
@@ -27,7 +27,23 @@ export const allowUpdate = (
 	resource: Book | Author,
 	formData: Book | Author
 ): boolean => {
-	const keys = Object.keys(resource);
+	const keys = Object.keys(formData);
 	if (isEqual(resource, formData)) return false;
 	return !keys.some((key) => !formData[key as keyof (Book | Author)]);
+};
+
+export const allowCreation = (formData: DraftAuthor | DraftBook) => {
+	return !Object.keys(formData).some(
+		(key) => !formData[key as keyof (DraftAuthor | DraftBook)]
+	);
+};
+
+export const DEFAULTS: Record<ResourceType, DraftAuthor | DraftBook> = {
+	book: {
+		title: "",
+		description: "",
+		publishedDate: undefined,
+		authorId: "",
+	},
+	author: { name: "", biography: "", bornDate: undefined },
 };

@@ -32,3 +32,16 @@ export type DropdownOption = {
 	value: string;
 	id: string;
 };
+
+export type DraftBook = {
+	title?: string;
+	description?: string;
+	publishedDate?: Date;
+	authorId?: string;
+};
+
+export type DraftAuthor = {
+	name?: string;
+	biography?: string;
+	bornDate?: Date;
+};

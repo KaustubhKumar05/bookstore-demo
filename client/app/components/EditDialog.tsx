@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Author, Book, DropdownOption } from "../types";
+import { Author, Book } from "../types";
 import { Dialog } from "./Dialog";
 import { allowUpdate, formattedKey, isAuthor } from "./utils";
-import { useMutation, useQuery } from "@apollo/client";
-import { GET_AUTHOR_LIST, UPDATE_AUTHOR, UPDATE_BOOK } from "../queries";
+import { useMutation } from "@apollo/client";
+import { UPDATE_AUTHOR, UPDATE_BOOK } from "../queries";
 import { DropdownSelector } from "./DropdownSelector";
+import { useAuthorList } from "../hooks/useAuthorList";
 
 export const EditDialog = ({
 	resource,
@@ -38,17 +39,7 @@ export const EditDialog = ({
 		onConfirm();
 	};
 
-	const { data } = useQuery(GET_AUTHOR_LIST, {
-		fetchPolicy: "cache-and-network",
-		skip: author,
-	});
-
-	const authorOptions: DropdownOption[] = data?.authors?.items?.map(
-		(item: Author) => ({
-			value: item.name,
-			id: item.id,
-		})
-	);
+	const { authorOptions } = useAuthorList(author);
 
 	useEffect(() => {
 		setEnableSubmit(allowUpdate(resource, formData));
@@ -61,6 +52,7 @@ export const EditDialog = ({
 					<div>
 						<span className="w-40 font-semibold">Author</span>
 						<DropdownSelector
+							name="author-select"
 							defaultValue={authorOptions?.find(
 								(assignedAuthor) =>
 									assignedAuthor.id === (formData as Book).authorId

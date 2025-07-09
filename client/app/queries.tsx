@@ -72,3 +72,11 @@ export const GET_AUTHOR_LIST = gql`
 		}
 	}
 `;
+
+export const CREATE_AUTHOR = gql`
+	mutation CreateAuthor($input: AuthorInput!) {
+		createAuthor(input: $input) {
+			id
+		}
+	}
+`;
