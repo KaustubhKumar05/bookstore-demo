@@ -47,3 +47,13 @@ export const DEFAULTS: Record<ResourceType, DraftAuthor | DraftBook> = {
 	},
 	author: { name: "", biography: "", bornDate: undefined },
 };
+
+export const DEFAULT_FILTERS = {
+	author: { name: "", birthYear: undefined },
+	book: {
+		title: "",
+		authorName: "",
+		publishedAfter: undefined,
+		publishedBefore: undefined,
+	},
+};

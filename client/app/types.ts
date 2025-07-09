@@ -2,14 +2,14 @@ export type ResourceType = "book" | "author";
 
 export type FilterTypes = {
 	book: {
-		title?: string;
-		authorName?: string;
-		publishedAfter?: Date;
-		publishedBefore?: Date;
+		title?: string | null;
+		authorName?: string | null;
+		publishedAfter?: Date | null;
+		publishedBefore?: Date | null;
 	};
 	author: {
-		name?: string;
-		birthYear?: number;
+		name?: string | null;
+		birthYear?: number | null;
 	};
 };
 
