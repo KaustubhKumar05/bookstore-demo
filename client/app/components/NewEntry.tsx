@@ -8,10 +8,11 @@ export const NewEntry = ({ selection }: { selection: ResourceType }) => {
 	return (
 		<>
 			<button
-				className="px-2 py-1 rounded bg-gray-700 flex items-center gap-2"
+				className="px-3 py-2 rounded bg-black flex items-center gap-2"
 				onClick={() => setShowCreateForm(true)}
 			>
-				New Entry <PlusCircledIcon height={20} width={20} />
+				<PlusCircledIcon height={20} width={20} />
+				New Entry
 			</button>
 			<CreateDialog
 				open={showCreateForm}

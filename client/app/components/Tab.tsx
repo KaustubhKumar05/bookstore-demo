@@ -14,7 +14,7 @@ export const Tab = ({
 					key={option}
 					className={`px-2 py-1 ${
 						currentValue === option ? "bg-gray-900" : "bg-gray-800"
-					} capitalize text-sm`}
+					} capitalize text-lg`}
 					onClick={() => onClick(option)}
 				>
 					{option + "s"}

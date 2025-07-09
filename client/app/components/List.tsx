@@ -38,18 +38,26 @@ export const List = ({
 	}, [selection, filters]);
 
 	if (error) {
-		return <p>Error: {error.message}</p>;
+		return (
+			<p className="text-xl font-bold my-5 text-red-500">
+				Error: {error.message}
+			</p>
+		);
 	}
 	if (loading) {
-		return <p>Loading...</p>;
+		return <p className="text-xl font-bold my-5">Loading...</p>;
 	}
 
 	if (!loading && !error && listData.items.length === 0) {
-		return <p className="font-semibold text-red-500">No results to display</p>;
+		return (
+			<p className="text-xl font-bold my-5 text-red-500">
+				No results to display
+			</p>
+		);
 	}
 
 	return (
-		<div className="max-w-3xl w-3xl flex flex-col gap-4">
+		<div className="w-full flex flex-col gap-4">
 			<div>
 				{listData.items.map((resource: Author | Book) => (
 					<ResourceEntry

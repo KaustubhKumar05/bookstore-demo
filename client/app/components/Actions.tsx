@@ -41,7 +41,7 @@ export const Actions = ({
 
 	return (
 		<>
-			<div className="ml-auto flex gap-4">
+			<div className="flex gap-4">
 				<button className="p-2 bg-black" onClick={() => setShowInfo(true)}>
 					<InfoCircledIcon />
 				</button>

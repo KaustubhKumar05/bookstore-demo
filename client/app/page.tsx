@@ -20,21 +20,22 @@ export default function App() {
 
 	return (
 		<ApolloProvider client={client}>
-			<div className="flex justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-				<main className="flex flex-col gap-4 items-center">
+			<div className="flex min-h-screen justify-center pt-8 p-4 font-[family-name:var(--font-geist-sans)] w-full">
+				<main className="flex flex-col gap-6 items-center w-full max-w-5xl">
 					<Tab
 						onClick={(value: string) => setSelection(value as ResourceType)}
 						currentValue={selection}
 						options={["author", "book"]}
 					/>
+					<div className="bg-gray-800 p-5 rounded w-full gap-4 flex flex-col items-center">
+						<Filter
+							filters={filters}
+							setFilters={setFilters}
+							resourceType={selection}
+						/>
 
-					<Filter
-						filters={filters}
-						setFilters={setFilters}
-						resourceType={selection}
-					/>
-
-					<NewEntry selection={selection} />
+						<NewEntry selection={selection} />
+					</div>
 
 					<List selection={selection} filters={filters} />
 				</main>

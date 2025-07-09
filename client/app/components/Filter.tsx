@@ -33,13 +33,15 @@ export const Filter = ({
 			filters[resourceType][key as keyof (typeof filters)[typeof resourceType]]
 	);
 	return (
-		<div className="flex items-center gap-2">
+		<div className="flex flex-col md:flex-row items-center w-full justify-center gap-4">
 			{Object.keys(filters[resourceType]).map((filter) => (
-				<div className="flex flex-col" key={filter}>
-					<label className="text-sm">{formattedKey[filter]}</label>
+				<div className="flex flex-col w-full md:max-w-1/4 gap-1" key={filter}>
+					<label className="font-semibold text-sm">
+						{formattedKey[filter]}
+					</label>
 					<input
 						{...FilterConfig[resourceType][filter]}
-						className="border rounded px-2 py-1"
+						className="border-2 rounded px-2 py-1 w-full"
 						type={FilterConfig[resourceType][filter].input.toString()}
 						value={
 							filters[resourceType][

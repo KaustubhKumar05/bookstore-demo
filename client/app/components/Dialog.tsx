@@ -29,15 +29,12 @@ export const Dialog = ({
 			onClick={() => setOpen(false)}
 		>
 			<div
-				className={`flex flex-col gap-2 ${width[size]} bg-gray-800 px-6 py-4 rounded-2xl`}
+				className={`flex flex-col gap-2 mx-4 ${width[size]} bg-gray-800 px-6 py-4 rounded-2xl`}
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div className="flex items-center justify-between border-b pb-2 border-gray-500">
 					<h2 className="text-lg font-semibold">{title}</h2>
-					<button
-						className="p-1"
-						onClick={() => setOpen(false)}
-					>
+					<button className="p-1" onClick={() => setOpen(false)}>
 						<Cross1Icon />
 					</button>
 				</div>

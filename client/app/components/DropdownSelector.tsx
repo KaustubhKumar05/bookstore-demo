@@ -32,7 +32,7 @@ export const DropdownSelector = ({
 		<div>
 			<select
 				name={name}
-				className="px-2 py-1 rounded border-2 focus:outline-none cursor-pointer hover:opacity-90"
+				className="px-2 py-1 w-full md:w-auto rounded border-2 focus:outline-none cursor-pointer hover:opacity-90"
 				value={selection?.value}
 				onChange={handleChange}
 			>
