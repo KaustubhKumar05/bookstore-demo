@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Author, Book } from "../types";
 import { Dialog } from "./Dialog";
-import { formattedKey } from "./utils";
+import { allowUpdate, formattedKey } from "./utils";
 
 export const EditDialog = ({
 	resource,
@@ -14,9 +14,13 @@ export const EditDialog = ({
 	setOpen: (state: boolean) => void;
 	title: string;
 }) => {
-	// TODO: implement validation, submit api request
 	const [enableSubmit, setEnableSubmit] = useState(false);
 	const [formData, setFormData] = useState(resource);
+
+	useEffect(() => {
+		setEnableSubmit(allowUpdate(resource, formData));
+	}, [resource, formData]);
+
 	return (
 		<Dialog title={title} open={open} setOpen={setOpen}>
 			<div className="flex flex-col">

@@ -1,4 +1,5 @@
 import { Author, Book } from "../types";
+import { isEqual } from "lodash";
 
 export const isAuthor = (resource: Book | Author) => "name" in resource;
 
@@ -19,4 +20,13 @@ export const formattedKey: Record<string, string> = {
 export const LIST_CONFIG = {
 	LIMIT: 5,
 	OFFSET: 0,
+};
+
+export const allowUpdate = (
+	resource: Book | Author,
+	formData: Book | Author
+): boolean => {
+	const keys = Object.keys(resource);
+	if (isEqual(resource, formData)) return false;
+	return !keys.some((key) => !formData[key as keyof (Book | Author)]);
 };
