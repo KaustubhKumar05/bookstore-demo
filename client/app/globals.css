@@ -33,3 +33,7 @@ button {
 input[type="date"]::-webkit-calendar-picker-indicator {
 	filter: invert(1);
 }
+
+input {
+	@apply bg-gray-900;
+}

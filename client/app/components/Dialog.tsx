@@ -25,7 +25,7 @@ export const Dialog = ({
 
 	return (
 		<div
-			className="w-screen h-screen fixed inset-0 flex items-center justify-center backdrop-blur-sm z-20"
+			className="w-screen h-screen fixed inset-0 flex items-center justify-center backdrop-blur-sm z-20 bg-black/50 shadow-lg"
 			onClick={() => setOpen(false)}
 		>
 			<div

@@ -11,12 +11,10 @@ export const CreateDialog = ({
 	resourceType,
 	open,
 	setOpen,
-	onConfirm,
 }: {
 	resourceType: ResourceType;
 	open: boolean;
 	setOpen: (state: boolean) => void;
-	onConfirm: () => void;
 }) => {
 	const [formData, setFormData] = useState(DEFAULTS[resourceType]);
 	const [enableSubmit, setEnableSubmit] = useState(false);
@@ -42,7 +40,6 @@ export const CreateDialog = ({
 		} else {
 			await createBook({ variables: { input: formData } });
 		}
-		onConfirm();
 	};
 
 	return (
