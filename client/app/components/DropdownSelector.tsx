@@ -21,7 +21,7 @@ export const DropdownSelector = ({
 	const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const selectedOption =
 			options.find((opt) => opt.value === e.target.value) || defaultValue;
-		console.log({ defaultValue });
+
 		if (selectedOption) {
 			setSelection(selectedOption);
 			onSelect(selectedOption);

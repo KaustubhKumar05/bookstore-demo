@@ -8,13 +8,13 @@ import { ResourceEntry } from "./ResourceEntry";
 import { LIST_CONFIG } from "./utils";
 
 export const List = ({
-	resourceType,
+	selection,
 	filters,
 }: {
-	resourceType: ResourceType;
+	selection: ResourceType;
 	filters: FilterTypes;
 }) => {
-	const isAuthor = resourceType === "author";
+	const isAuthor = selection === "author";
 	const [page, setPage] = useState(1);
 
 	const { data, loading, error, refetch } = useQuery(
@@ -23,19 +23,19 @@ export const List = ({
 			variables: {
 				limit: LIST_CONFIG.LIMIT,
 				offset: (page - 1) * LIST_CONFIG.LIMIT,
-				filter: filters[resourceType],
+				filter: filters[selection],
 			},
 			fetchPolicy: "cache-and-network",
 		}
 	);
 
-	const listData = data?.[resourceType + "s"];
+	const listData = data?.[selection + "s"];
 
 	console.log("debug>", { data, loading, error });
 
 	useEffect(() => {
 		setPage(1);
-	}, [resourceType, filters]);
+	}, [selection, filters]);
 
 	if (error) {
 		return <p>Error: {error.message}</p>;
@@ -53,7 +53,7 @@ export const List = ({
 			<div>
 				{listData.items.map((resource: Author | Book) => (
 					<ResourceEntry
-						key={resource.id + resourceType}
+						key={resource.id + selection}
 						resource={resource}
 						refetch={refetch}
 						isLastElement={listData.items.length === 1}
