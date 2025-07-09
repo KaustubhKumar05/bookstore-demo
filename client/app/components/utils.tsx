@@ -15,6 +15,7 @@ export const formattedKey: Record<string, string> = {
 	publishedAfter: "Published After",
 	publishedBefore: "Published Before",
 	birthYear: "Birth Year",
+	authorId: "Author ID",
 };
 
 export const LIST_CONFIG = {

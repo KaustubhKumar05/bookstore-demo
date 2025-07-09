@@ -25,4 +25,5 @@ export type Book = {
 	title: string;
 	description: string;
 	publishedDate: Date;
+	authorId?: string
 };

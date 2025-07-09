@@ -28,3 +28,8 @@ body {
 button {
 	@apply cursor-pointer hover:opacity-80 rounded font-semibold disabled:cursor-not-allowed disabled:opacity-90;
 }
+
+/* Black to white */
+input[type="date"]::-webkit-calendar-picker-indicator {
+	filter: invert(1);
+}

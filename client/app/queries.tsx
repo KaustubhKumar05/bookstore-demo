@@ -22,6 +22,7 @@ export const GET_BOOKS = gql`
 				title
 				description
 				publishedDate
+				authorId
 			}
 			count
 		}
@@ -37,5 +38,25 @@ export const DELETE_BOOK = gql`
 export const DELETE_AUTHOR = gql`
 	mutation DeleteAuthor($id: ID!) {
 		deleteAuthor(id: $id)
+	}
+`;
+
+export const UPDATE_AUTHOR = gql`
+	mutation UpdateAuthor($id: ID!, $input: AuthorInput!) {
+		updateAuthor(id: $id, input: $input) {
+			name
+			biography
+			bornDate
+		}
+	}
+`;
+
+export const UPDATE_BOOK = gql`
+	mutation UpdateBook($id: ID!, $input: BookInput!) {
+		updateBook(id: $id, input: $input) {
+			title
+			description
+			publishedDate
+		}
 	}
 `;

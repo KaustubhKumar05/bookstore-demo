@@ -12,7 +12,8 @@ export const typeDefs = `#graphql
     title: String!
     description: String
     publishedDate: String
-    author: Author!
+    authorId: ID!
+    author: Author
   }
 
   input AuthorInput {

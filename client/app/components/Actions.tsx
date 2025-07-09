@@ -67,6 +67,7 @@ export const Actions = ({
 				resource={entry}
 				open={showEditForm}
 				setOpen={setShowEditForm}
+				onConfirm={() => refetch()}
 			/>
 			<DeleteDialog
 				title={`Delete ${author ? "Author" : "Book"}?`}

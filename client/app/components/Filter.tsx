@@ -27,12 +27,11 @@ export const Filter = ({
 	setFilters: (filter: any) => void;
 	resourceType: ResourceType;
 }) => {
-	console.log({ filters });
 	return (
 		<div className="flex items-center gap-2">
 			{Object.keys(filters[resourceType]).map((filter: string) => (
 				<div className="flex flex-col" key={filter}>
-					<label>{formattedKey[filter]}</label>
+					<label className="text-sm">{formattedKey[filter]}</label>
 					<input
 						{...FilterConfig[resourceType][filter]}
 						className="border rounded px-2 py-1"

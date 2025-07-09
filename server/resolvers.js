@@ -20,7 +20,7 @@ export const resolvers = {
 		},
 		authors: async (_, { limit, offset, filter }, { models }) => {
 			const where = {};
-			console.log({ filter });
+
 			if (filter.name) {
 				where.name = { [Op.iLike]: `%${filter.name}%` };
 			}
@@ -53,6 +53,10 @@ export const resolvers = {
 			const where = {};
 			const include = [];
 
+			const attributes = {
+				include: ["id", "title", "published_date", "author_id"],
+			};
+
 			if (filter.title) {
 				where.title = { [Op.iLike]: `%${filter.title}%` };
 			}
@@ -80,13 +84,8 @@ export const resolvers = {
 			}
 			const { count, rows } = await models.Book.findAndCountAll({
 				where,
-				// TODO: should not be the default
-				include: include.length
-					? include
-					: {
-							model: models.Author,
-							as: "author",
-						},
+				attributes,
+				include: include.length ? include : [],
 				limit,
 				offset,
 				order: [["id", "ASC"]],
@@ -149,7 +148,6 @@ export const resolvers = {
 				throw new Error("Book not found");
 			}
 			await book.destroy();
-			console.log("debug> deleted");
 			return true;
 		},
 	},
@@ -163,6 +161,7 @@ export const resolvers = {
 		author: async (book) => {
 			return await book.getAuthor();
 		},
+		authorId: async (book) => book.author_id,
 		publishedDate: (book) => book.published_date?.toISOString().split("T")[0],
 	},
 };
