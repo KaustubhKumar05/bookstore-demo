@@ -38,11 +38,6 @@ export const resolvers = {
 				where,
 				limit,
 				offset,
-				// TODO: should not be the default
-				include: {
-					model: models.Book,
-					as: "books",
-				},
 				distinct: true,
 				col: "id",
 				order: [["id", "ASC"]],

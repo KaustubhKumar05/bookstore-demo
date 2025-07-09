@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { Author, Book } from "../types";
 import { Dialog } from "./Dialog";
 import { formattedKey, isAuthor } from "./utils";
-import { GET_REVIEWS } from "../queries";
+import { GET_AUTHOR, GET_REVIEWS } from "../queries";
 import { Reviews } from "./Reviews";
 
 export const InfoDialog = ({
@@ -23,6 +23,12 @@ export const InfoDialog = ({
 		fetchPolicy: "cache-and-network",
 	});
 
+	const { data: authorData } = useQuery(GET_AUTHOR, {
+		variables: { id: (resource as Book).authorId },
+		fetchPolicy: "network-only",
+		skip: author,
+	});
+
 	return (
 		<Dialog title={title} open={open} setOpen={setOpen}>
 			<div className="flex flex-col">
@@ -30,7 +36,7 @@ export const InfoDialog = ({
 					.filter((key) => !key.toLowerCase().includes("id"))
 					.map((key) => (
 						<div
-							className="flex flex-col gap-1 my-2 py-1 w-full text-sm border-dashed"
+							className="flex flex-col gap-1 my-0.5 py-1 w-full text-sm border-dashed"
 							key={key}
 						>
 							<span className="w-40 font-semibold text-gray-300">
@@ -39,7 +45,15 @@ export const InfoDialog = ({
 							<span>{resource[key as keyof (Book | Author)]}</span>
 						</div>
 					))}
-				<Reviews reviews={data?.reviews} loading={loading} />
+				{authorData && (
+					<>
+						<span className="w-40 font-semibold text-gray-300">Author</span>
+						<span>{authorData?.author?.name}</span>
+					</>
+				)}
+				{!author && !loading && (
+					<Reviews reviews={data?.reviews} loading={loading} />
+				)}
 
 				<div className="flex justify-center items-center w-full mt-4">
 					<button

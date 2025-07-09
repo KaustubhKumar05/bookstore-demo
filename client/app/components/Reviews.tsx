@@ -21,7 +21,7 @@ export const Reviews = ({
 	}
 
 	return (
-		<div className="flex items-center gap-4 w-full bg-gray-800 py-2">
+		<div className="flex items-center gap-1 w-full bg-gray-800 mt-5">
 			<button disabled={index === 0} onClick={() => setIndex(index - 1)}>
 				<ChevronLeftIcon height={24} width={24} />
 			</button>
