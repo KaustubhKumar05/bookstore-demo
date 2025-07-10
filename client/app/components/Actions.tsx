@@ -1,6 +1,6 @@
 import { InfoCircledIcon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { Author, Book } from "../types";
-import { isAuthor } from "./utils";
+import { isAuthor } from "../utils";
 import { InfoDialog } from "./InfoDialog";
 import { useState } from "react";
 import { EditDialog } from "./EditDialog";

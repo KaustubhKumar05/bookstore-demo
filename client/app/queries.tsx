@@ -63,7 +63,7 @@ export const UPDATE_BOOK = gql`
 
 export const GET_AUTHOR_LIST = gql`
 	query GetAuthorList {
-		authors(limit: 1000, offset: 0, filter: {}) {
+		authors(limit: null, offset: 0, filter: {}) {
 			items {
 				id
 				name
