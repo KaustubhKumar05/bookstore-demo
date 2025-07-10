@@ -53,7 +53,7 @@ export const CreateDialog = ({
 								name="author-select"
 								options={authorOptions}
 								onSelect={(selectedOption) =>
-									setFormData((prev: Record<string, string>) => ({
+									setFormData((prev: Record<string, string | Date>) => ({
 										...prev,
 										authorId: selectedOption.id,
 									}))
@@ -65,7 +65,7 @@ export const CreateDialog = ({
 								type={key.toLowerCase().includes("date") ? "date" : "text"}
 								value={formData[key as keyof (DraftAuthor | DraftBook)]}
 								onChange={(e) => {
-									setFormData((prev: Record<string, string>) => ({
+									setFormData((prev: Record<string, string | Date>) => ({
 										...prev,
 										[key]: e.target.value,
 									}));

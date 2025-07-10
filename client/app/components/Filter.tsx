@@ -25,7 +25,7 @@ export const Filter = ({
 	resourceType,
 }: {
 	filters: FilterTypes;
-	setFilters: (filter: FilterTypes) => void;
+	setFilters: React.Dispatch<React.SetStateAction<FilterTypes>>;
 	resourceType: ResourceType;
 }) => {
 	const noFiltersApplied = !Object.keys(filters[resourceType]).some(
@@ -49,12 +49,12 @@ export const Filter = ({
 							] ?? ""
 						}
 						onChange={(e) => {
-							setFilters((prev) => {
+							setFilters((prev: FilterTypes) => {
 								const newFilters = cloneDeep(prev);
 								const key =
 									filter as keyof (typeof newFilters)[typeof resourceType];
 								const inputType = FilterConfig[resourceType][filter].input;
-								let value: any = e.target.value;
+								let value: string | number | null = e.target.value;
 								if (inputType === "number") {
 									value = value === "" ? null : Number(value);
 								} else if (inputType === "date") {
@@ -62,6 +62,7 @@ export const Filter = ({
 								} else {
 									value = value === "" ? null : value;
 								}
+								// @ts-expect-error There are limited input types, which are handled above
 								newFilters[resourceType][key] = value;
 								return newFilters;
 							});

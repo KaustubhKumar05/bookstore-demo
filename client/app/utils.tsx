@@ -1,4 +1,4 @@
-import { Author, Book, DraftAuthor, DraftBook, ResourceType } from "../types";
+import { Author, Book, DraftAuthor, DraftBook, ResourceType } from "./types";
 import { isEqual } from "lodash";
 
 export const isAuthor = (resource: Book | Author) => "name" in resource;
@@ -59,6 +59,9 @@ export const DEFAULT_FILTERS = {
 };
 
 export const getFromSessionStorage = (key: string) => {
-	const userData = JSON.parse(sessionStorage.getItem("userData") || "{}");
-	return userData[key];
+	if (typeof window !== "undefined") {
+		const userData = JSON.parse(sessionStorage.getItem("userData") || "{}");
+		return userData[key];
+	}
+	return null;
 };

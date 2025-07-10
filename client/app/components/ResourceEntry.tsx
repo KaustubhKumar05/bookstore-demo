@@ -20,10 +20,12 @@ export const ResourceEntry = ({
 				<p className="font-bold">{resource.id}</p>
 				<div>
 					<p className="font-semibold text-lg">
-						{author ? resource.name : resource.title}
+						{author ? (resource as Author).name : (resource as Book).title}
 					</p>
 					<p className="">
-						{author ? resource.biography : resource.description}
+						{author
+							? (resource as Author).biography
+							: (resource as Book).description}
 					</p>
 				</div>
 				<div className="hidden md:block ml-auto">

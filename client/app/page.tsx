@@ -27,6 +27,10 @@ export default function App() {
 				<p>Hi {username}!</p>
 				<button
 					onClick={() => {
+						if (!window?.sessionStorage) {
+							return;
+						}
+
 						window.sessionStorage.clear();
 						router.push("/login");
 					}}

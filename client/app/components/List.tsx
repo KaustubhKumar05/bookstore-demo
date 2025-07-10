@@ -41,7 +41,7 @@ export const List = ({
 	// Handles the 12 hour timeout for the token
 	if (error) {
 		setTimeout(() => {
-			if (error.message === "Not authenticated") {
+			if (error.message === "Not authenticated" && window?.sessionStorage) {
 				sessionStorage.removeItem("userData");
 				router.push("/login");
 			}

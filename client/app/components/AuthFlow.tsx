@@ -15,6 +15,9 @@ export const AuthFlow = ({ flow }: { flow: "signUp" | "logIn" }) => {
 	);
 
 	useEffect(() => {
+		if (!window?.sessionStorage) {
+			return;
+		}
 		if (data?.[flow]?.token) {
 			sessionStorage.setItem("userData", JSON.stringify(data[flow]));
 		}
