@@ -57,3 +57,8 @@ export const DEFAULT_FILTERS = {
 		publishedBefore: undefined,
 	},
 };
+
+export const getFromSessionStorage = (key: string) => {
+	const userData = JSON.parse(sessionStorage.getItem("userData") || "{}");
+	return userData[key];
+};

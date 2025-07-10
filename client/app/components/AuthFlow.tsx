@@ -40,6 +40,7 @@ export const AuthFlow = ({ flow }: { flow: "signUp" | "logIn" }) => {
 					className="border-2 rounded px-2 py-1 text-center"
 					type="text"
 					ref={usernameRef}
+					disabled={loading}
 					placeholder="Username"
 				/>
 
@@ -48,6 +49,7 @@ export const AuthFlow = ({ flow }: { flow: "signUp" | "logIn" }) => {
 					className="border-2 rounded px-2 py-1 text-center"
 					type="password"
 					ref={passwordRef}
+					disabled={loading}
 					placeholder="Password"
 				/>
 				<button
