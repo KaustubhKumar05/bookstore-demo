@@ -29,7 +29,7 @@ export const EditDialog = ({
 
 	const handleUpdate = async (id: string) => {
 		const input: Record<string, string | Date> = { ...formData };
-		delete input.id;
+		["id", "__typename"].forEach((key) => delete input[key]);
 
 		if (author) {
 			await updateAuthor({ variables: { id, input } });

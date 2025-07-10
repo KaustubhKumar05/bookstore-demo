@@ -45,7 +45,6 @@
 ### Day 6
 - Authentication
 - Hosting
-- Unit tests
 
 
 
