@@ -17,7 +17,6 @@ export const DropdownSelector = ({
 	const [selection, setSelection] = useState<DropdownOption | undefined>(
 		defaultValue
 	);
-
 	const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const selectedOption =
 			options.find((opt) => opt.value === e.target.value) || defaultValue;
@@ -33,14 +32,12 @@ export const DropdownSelector = ({
 			<select
 				name={name}
 				className="px-2 py-1 h-10 w-full bg-gray-900 rounded border-2 focus:outline-none cursor-pointer hover:opacity-90"
-				value={selection?.value}
+				value={selection?.value ?? ""}
 				onChange={handleChange}
 			>
-				{!defaultValue && (
-					<option value="" disabled>
-						{placeholder}
-					</option>
-				)}
+				<option value="" disabled hidden>
+					{placeholder}
+				</option>
 				{options?.map((option) => (
 					<option
 						className="bg-gray-700 cursor-pointer"
