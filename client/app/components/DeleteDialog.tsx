@@ -21,7 +21,7 @@ export const DeleteDialog = ({
 			<div className="flex flex-col">
 				<h3 className="font-semibold text-sm">
 					Are you sure you want to delete the entry for{" "}
-					{author ? resource.name : resource.title}? This action cannot be
+					{author ? (resource as Author).name : (resource as Book).title}? This action cannot be
 					reverted.
 				</h3>
 				<div className="flex justify-center gap-8 items-center w-full mt-4">
