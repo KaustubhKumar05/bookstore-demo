@@ -12,6 +12,8 @@ export default function App() {
 	const router = useRouter();
 	const [selection, setSelection] = useState<ResourceType>("author");
 	const [filters, setFilters] = useState<FilterTypes>(DEFAULT_FILTERS);
+	// Scenario: When creating a new entry should create a new page. This causes a re-render of the list and updates the pagination. Could have been avoided by moving some states from list to the App
+	const [listKey, setListKey] = useState(0);
 	const username = getFromSessionStorage("user")?.username;
 
 	useEffect(() => {
@@ -52,10 +54,13 @@ export default function App() {
 						resourceType={selection}
 					/>
 
-					<NewEntry selection={selection} />
+					<NewEntry
+						selection={selection}
+						onCreation={() => setListKey((k) => k + 1)}
+					/>
 				</div>
 
-				<List selection={selection} filters={filters} />
+				<List key={listKey} selection={selection} filters={filters} />
 			</main>
 		</div>
 	);

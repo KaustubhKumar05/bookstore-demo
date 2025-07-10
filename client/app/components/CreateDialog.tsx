@@ -11,10 +11,12 @@ export const CreateDialog = ({
 	resourceType,
 	open,
 	setOpen,
+	onCreation,
 }: {
 	resourceType: ResourceType;
 	open: boolean;
 	setOpen: (state: boolean) => void;
+	onCreation: () => void;
 }) => {
 	const [formData, setFormData] = useState(DEFAULTS[resourceType]);
 	const [enableSubmit, setEnableSubmit] = useState(false);
@@ -35,6 +37,7 @@ export const CreateDialog = ({
 	const { authorOptions } = useAuthorList(isAuthor);
 	const handleCreation = async () => {
 		await createResource({ variables: { input: formData } });
+		onCreation();
 	};
 
 	return (

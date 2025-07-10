@@ -3,7 +3,13 @@ import { ResourceType } from "../types";
 import { CreateDialog } from "./CreateDialog";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 
-export const NewEntry = ({ selection }: { selection: ResourceType }) => {
+export const NewEntry = ({
+	selection,
+	onCreation,
+}: {
+	selection: ResourceType;
+	onCreation: () => void;
+}) => {
 	const [showCreateForm, setShowCreateForm] = useState(false);
 	return (
 		<>
@@ -18,6 +24,7 @@ export const NewEntry = ({ selection }: { selection: ResourceType }) => {
 				open={showCreateForm}
 				setOpen={setShowCreateForm}
 				resourceType={selection}
+				onCreation={onCreation}
 			/>
 		</>
 	);
