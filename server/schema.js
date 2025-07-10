@@ -16,6 +16,24 @@ export const typeDefs = `#graphql
     author: Author
   }
 
+  type Review {
+    id: ID!
+    reviewText: String!
+    username: String!
+    bookId: ID!
+  }
+
+  type User {
+    id: ID!
+    username: String!
+    password: String!
+  }
+
+  input AuthInput {
+    username: String!
+    password: String!
+  }
+
   input AuthorInput {
     name: String!
     biography: String
@@ -51,11 +69,9 @@ export const typeDefs = `#graphql
     count: Int!
   }
 
-  type Review {
-    id: ID!
-    reviewText: String!
-    username: String!
-    bookId: ID!
+  type AuthResult {
+    token: String!
+    user: User!
   }
 
   type Query {
@@ -74,5 +90,8 @@ export const typeDefs = `#graphql
     createBook(input: BookInput!): Book!
     updateBook(id: ID!, input: BookInput!): Book!
     deleteBook(id: ID!): Boolean!
+
+    signUp(input: AuthInput!): AuthResult!
+    logIn(input: AuthInput!): AuthResult!
   }
 `;

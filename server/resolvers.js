@@ -1,5 +1,7 @@
 import { Op } from "sequelize";
 import { Review } from "./models/Review.js";
+import { User } from "./models/User.js";
+import { getJWTToken, hashPassword } from "./utils.js";
 
 export const resolvers = {
 	Query: {
@@ -149,6 +151,31 @@ export const resolvers = {
 			}
 			await book.destroy();
 			return true;
+		},
+		signUp: async (_, { input }) => {
+			const { username, password } = input;
+			const userExists = await User.findOne({ username });
+			if (userExists) {
+				throw new Error("User already exists");
+			}
+			const hashedPassword = hashPassword(password);
+			const user = await User.create({ username, password: hashedPassword });
+			const token = getJWTToken(user);
+			return { token, user };
+		},
+		logIn: async (_, { input }) => {
+			const { username, password } = input;
+			const user = await User.findOne({ username });
+			if (!user) {
+				throw new Error("User not found");
+			}
+			const hashedPassword = hashPassword(password);
+			if (hashedPassword !== user.password) {
+				throw new Error("Invalid password");
+			}
+			const token = getJWTToken(user);
+			console.log({ token, user });
+			return { token, user };
 		},
 	},
 	Author: {
