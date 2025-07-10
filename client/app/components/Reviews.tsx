@@ -10,7 +10,6 @@ export const Reviews = ({
 	loading: boolean;
 }) => {
 	const [index, setIndex] = useState(0);
-	console.log("inner", { reviews });
 
 	if (reviews?.length === 0) {
 		return <></>;

@@ -10,14 +10,11 @@ export const getJWTToken = (user) =>
 	});
 
 export const authMiddleware = async (resolve, parent, args, context, info) => {
-	console.log({ path: info.fieldName });
 	if (
 		["logIn", "signUp", "user", "username", "token"].includes(info.fieldName)
 	) {
-		console.log("skipping auth middleware");
 		return resolve(parent, args, context, info);
 	}
-	console.log("authenticating");
 	if (!context.user) {
 		throw new Error("Not authenticated");
 	}

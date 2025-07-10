@@ -29,17 +29,12 @@ export const CreateDialog = ({
 		setEnableSubmit(allowCreation(formData));
 	}, [formData]);
 
-	const [createAuthor] = useMutation(CREATE_AUTHOR);
-	const [createBook] = useMutation(CREATE_BOOK);
-
+	const [createResource, { loading }] = useMutation(
+		isAuthor ? CREATE_AUTHOR : CREATE_BOOK
+	);
 	const { authorOptions } = useAuthorList(isAuthor);
-
 	const handleCreation = async () => {
-		if (isAuthor) {
-			await createAuthor({ variables: { input: formData } });
-		} else {
-			await createBook({ variables: { input: formData } });
-		}
+		await createResource({ variables: { input: formData } });
 	};
 
 	return (
@@ -87,9 +82,9 @@ export const CreateDialog = ({
 							await handleCreation();
 							setOpen(false);
 						}}
-						disabled={!enableSubmit}
+						disabled={!enableSubmit || loading}
 					>
-						Create
+						{loading ? "Creating..." : "Create"}
 					</button>
 				</div>
 			</div>

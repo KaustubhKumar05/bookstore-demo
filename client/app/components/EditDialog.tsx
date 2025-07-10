@@ -24,18 +24,15 @@ export const EditDialog = ({
 	const [enableSubmit, setEnableSubmit] = useState(false);
 	const [formData, setFormData] = useState(resource);
 
-	const [updateAuthor] = useMutation(UPDATE_AUTHOR);
-	const [updateBook] = useMutation(UPDATE_BOOK);
+	const [updateResource, { loading }] = useMutation(
+		author ? UPDATE_AUTHOR : UPDATE_BOOK
+	);
 
 	const handleUpdate = async (id: string) => {
 		const input: Record<string, string | Date> = { ...formData };
 		["id", "__typename"].forEach((key) => delete input[key]);
 
-		if (author) {
-			await updateAuthor({ variables: { id, input } });
-		} else {
-			await updateBook({ variables: { id, input } });
-		}
+		await updateResource({ variables: { id, input } });
 		onConfirm();
 	};
 
@@ -110,9 +107,9 @@ export const EditDialog = ({
 							await handleUpdate(resource.id);
 							setOpen(false);
 						}}
-						disabled={!enableSubmit}
+						disabled={!enableSubmit || loading}
 					>
-						Update
+						{loading ? "Updating..." : "Update"}
 					</button>
 				</div>
 			</div>

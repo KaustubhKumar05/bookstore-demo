@@ -70,7 +70,11 @@ export const List = ({
 				{listData.items.map((resource: Author | Book) => (
 					<ResourceEntry
 						key={resource.id + selection}
-						resource={resource}
+						resource={
+							Object.fromEntries(
+								Object.entries(resource).filter(([k]) => k !== "__typename")
+							) as typeof resource
+						}
 						refetch={refetch}
 						isLastElement={listData.items.length === 1}
 						updatePage={() => setPage(Math.max(1, page - 1))}

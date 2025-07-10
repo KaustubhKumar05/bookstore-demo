@@ -174,7 +174,6 @@ export const resolvers = {
 				throw new Error("Invalid password");
 			}
 			const token = getJWTToken(user);
-			console.log({ token, user });
 			return { token, user };
 		},
 	},

@@ -24,18 +24,16 @@ export const Actions = ({
 	const [showEditForm, setShowEditForm] = useState(false);
 	const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
-	const [deleteBook] = useMutation(DELETE_BOOK);
-	const [deleteAuthor] = useMutation(DELETE_AUTHOR);
+	const [deleteResource, { loading }] = useMutation(
+		author ? DELETE_AUTHOR : DELETE_BOOK
+	);
 
 	const handleDelete = async (id: string) => {
 		if (isLastElement) {
 			updatePage();
 		}
-		if (author) {
-			await deleteAuthor({ variables: { id } });
-		} else {
-			await deleteBook({ variables: { id } });
-		}
+
+		await deleteResource({ variables: { id } });
 		refetch();
 	};
 
@@ -75,6 +73,7 @@ export const Actions = ({
 				open={showDeleteConfirmation}
 				setOpen={setShowDeleteConfirmation}
 				onConfirm={() => handleDelete(entry.id)}
+				loading={loading}
 			/>
 		</>
 	);
