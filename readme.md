@@ -8,11 +8,7 @@
 - Models for User and Review using Mongoose
 - GraphQL CRUD APIs
 - Next for FE
-
-## Stretch goals:
-
-- Implement authentication
-- Unit tests
+- Authentication
 
 ### Day 1
 
