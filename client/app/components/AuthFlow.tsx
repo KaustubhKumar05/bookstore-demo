@@ -61,6 +61,8 @@ export const AuthFlow = ({ flow }: { flow: "signUp" | "logIn" }) => {
 									input: { username, password },
 								},
 							});
+						} else {
+							alert("Please enter the username and password!");
 						}
 					}}
 					className="bg-black px-4 py-2 rounded"
