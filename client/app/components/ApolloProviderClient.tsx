@@ -10,7 +10,9 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
 	const token =
-		typeof window !== "undefined" ? sessionStorage.getItem("token") : null;
+		typeof window !== "undefined"
+			? JSON.parse(sessionStorage.getItem("userData") || "{}").token
+			: null;
 	return {
 		headers: {
 			...headers,

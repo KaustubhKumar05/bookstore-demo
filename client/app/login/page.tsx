@@ -1,5 +1,7 @@
 "use client";
 
+import { AuthFlow } from "../components/AuthFlow";
+
 export default function LoginPage() {
-	return <div>Login</div>;
+	return <AuthFlow flow="logIn" />;
 }

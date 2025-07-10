@@ -116,3 +116,14 @@ export const SIGNUP = gql`
 		}
 	}
 `;
+
+export const LOGIN = gql`
+	mutation Login($input: AuthInput!) {
+		logIn(input: $input) {
+			token
+			user {
+				username
+			}
+		}
+	}
+`;
