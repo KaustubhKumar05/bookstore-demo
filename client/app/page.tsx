@@ -6,14 +6,26 @@ import { Tab } from "./components/Tab";
 import { Filter } from "./components/Filter";
 import { DEFAULT_FILTERS } from "./utils";
 import { NewEntry } from "./components/NewEntry";
+import { useRouter } from "next/navigation";
 
 export default function App() {
+	const router = useRouter();
 	const [selection, setSelection] = useState<ResourceType>("author");
-
 	const [filters, setFilters] = useState<FilterTypes>(DEFAULT_FILTERS);
 
 	return (
-		<div className="flex min-h-screen justify-center pt-8 p-4 font-[family-name:var(--font-geist-sans)] w-full">
+		<div className="flex min-h-screen justify-center pt-18 p-4 font-[family-name:var(--font-geist-sans)] w-full">
+			<div className="fixed top-0 bg-gray-800 p-4 flex justify-end w-full">
+				<button
+					onClick={() => {
+						window.sessionStorage.clear();
+						router.push("/login");
+					}}
+					className="bg-black px-2 py-1"
+				>
+					Log out
+				</button>
+			</div>
 			<main className="flex flex-col gap-6 items-center w-full max-w-5xl">
 				<Tab
 					onClick={(value: string) => setSelection(value as ResourceType)}

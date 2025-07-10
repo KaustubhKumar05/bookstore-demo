@@ -13,9 +13,9 @@ export default function SignupPage() {
 
 	useEffect(() => {
 		if (data?.signUp?.token) {
-			console.log({ data });
-			sessionStorage.setItem("token", data.signUp.token);
-			console.log("pushing");
+			sessionStorage.setItem("userData", data.signUp);
+		}
+		if (sessionStorage.getItem("userData")) {
 			router.push("/");
 		}
 	}, [data, router]);
