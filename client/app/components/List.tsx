@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Pagination } from "./Pagination";
 import { ResourceEntry } from "./ResourceEntry";
 import { LIST_CONFIG } from "../utils";
+import { useRouter } from "next/navigation";
 
 export const List = ({
 	selection,
@@ -31,13 +32,20 @@ export const List = ({
 
 	const listData = data?.[selection + "s"];
 
-	console.log("debug>", { data, loading, error });
+	const router = useRouter();
 
 	useEffect(() => {
 		setPage(1);
 	}, [selection, filters]);
 
+	// Handles the 12 hour timeout for the token
 	if (error) {
+		setTimeout(() => {
+			if (error.message === "Not authenticated") {
+				sessionStorage.removeItem("userData");
+				router.push("/login");
+			}
+		}, 2000);
 		return (
 			<p className="text-xl font-bold my-5 text-red-500">
 				Error: {error.message}

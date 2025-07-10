@@ -10,10 +10,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-	const token =
-		typeof window !== "undefined"
-			? getFromSessionStorage("token")
-			: null;
+	const token = getFromSessionStorage("token");
 	return {
 		headers: {
 			...headers,

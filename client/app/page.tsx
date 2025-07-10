@@ -1,7 +1,7 @@
 "use client";
 import { List } from "./components/List";
 import { FilterTypes, ResourceType } from "./types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tab } from "./components/Tab";
 import { Filter } from "./components/Filter";
 import { DEFAULT_FILTERS, getFromSessionStorage } from "./utils";
@@ -13,6 +13,13 @@ export default function App() {
 	const [selection, setSelection] = useState<ResourceType>("author");
 	const [filters, setFilters] = useState<FilterTypes>(DEFAULT_FILTERS);
 	const username = getFromSessionStorage("user")?.username;
+
+	useEffect(() => {
+		const token = getFromSessionStorage("token");
+		if (!token) {
+			router.push("/login");
+		}
+	}, [router]);
 
 	return (
 		<div className="flex min-h-screen justify-center pt-18 p-4 font-[family-name:var(--font-geist-sans)] w-full">
