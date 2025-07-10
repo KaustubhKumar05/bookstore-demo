@@ -1,34 +1,37 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ApolloProviderClient } from "./components/ApolloProviderClient";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+	variable: "--font-geist-sans",
+	subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+	variable: "--font-geist-mono",
+	subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Bookstore demo",
-  description: "Built with Next, GraphQL, PostgresQL",
+	title: "Bookstore demo",
+	description: "Built with Next, GraphQL, PostgresQL",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<ApolloProviderClient>
+				<body
+					className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				>
+					{children}
+				</body>
+			</ApolloProviderClient>
+		</html>
+	);
 }

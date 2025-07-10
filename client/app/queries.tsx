@@ -105,3 +105,14 @@ export const GET_REVIEWS = gql`
 		}
 	}
 `;
+
+export const SIGNUP = gql`
+	mutation Signup($input: AuthInput!) {
+		signUp(input: $input) {
+			token
+			user {
+				username
+			}
+		}
+	}
+`;

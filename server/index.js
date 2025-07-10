@@ -7,9 +7,9 @@ import { resolvers } from "./resolvers.js";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import { applyMiddleware } from 'graphql-middleware';
-import { authMiddleware } from './authMiddleware.js';
+import { makeExecutableSchema } from "@graphql-tools/schema";
+import { applyMiddleware } from "graphql-middleware";
+import { authMiddleware } from "./utils.js";
 
 const sequelize = new Sequelize(process.env.PG_CONNECTION_URL);
 
