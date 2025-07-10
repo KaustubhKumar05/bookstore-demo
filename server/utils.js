@@ -8,3 +8,13 @@ export const getJWTToken = (user) =>
 	jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
 		expiresIn: "12h",
 	});
+
+export const authMiddleware = async (resolve, parent, args, context, info) => {
+	if (["logIn", "signUp"].includes(info.fieldName)) {
+		return resolve(parent, args, context, info);
+	}
+	if (!context.user) {
+		throw new Error("Not authenticated");
+	}
+	return resolve(parent, args, context, info);
+};

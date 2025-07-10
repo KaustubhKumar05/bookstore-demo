@@ -6,6 +6,10 @@ import { typeDefs } from "./schema.js";
 import { resolvers } from "./resolvers.js";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { applyMiddleware } from 'graphql-middleware';
+import { authMiddleware } from './authMiddleware.js';
 
 const sequelize = new Sequelize(process.env.PG_CONNECTION_URL);
 
@@ -31,14 +35,30 @@ mongoose.connection.on("error", (err) => {
 	console.error("MongoDB connection error:", err);
 });
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+const schemaWithMiddleware = applyMiddleware(schema, authMiddleware);
+
+const server = new ApolloServer({ schema: schemaWithMiddleware });
 
 sequelize.sync().then(async () => {
 	const { url } = await startStandaloneServer(server, {
 		listen: { port: process.env.PORT || 4000 },
-		context: async () => ({
-			models: { Author, Book },
-		}),
+		context: async ({ req }) => {
+			const authHeader = req.headers.authorization || "";
+			let user = null;
+			if (authHeader.startsWith("Bearer ")) {
+				const token = authHeader.split(" ")[1];
+				try {
+					user = jwt.verify(token, process.env.JWT_SECRET);
+				} catch (e) {
+					user = null;
+				}
+			}
+			return {
+				models: { Author, Book },
+				user,
+			};
+		},
 	});
 	console.log("Running at", url);
 });

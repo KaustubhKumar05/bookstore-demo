@@ -1,7 +1,7 @@
 import { Op } from "sequelize";
 import { Review } from "./models/Review.js";
 import { User } from "./models/User.js";
-import { getJWTToken, hashPassword } from "./utils.js";
+import { hashPassword, getJWTToken } from "./utils.js";
 
 export const resolvers = {
 	Query: {
