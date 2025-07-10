@@ -1,5 +1,9 @@
 # Book store demo
 
+[Hosted on Vercel](https://bookstore-demo-vert.vercel.app/login)
+
+[Demo video on Loom](https://www.loom.com/share/427c10a440604aa388659f94fb3419aa?sid=60c3423e-586a-4863-9397-cb8aa8d2a1a4)
+
 ## Tasks:
 
 - Setup project with relevant deps
