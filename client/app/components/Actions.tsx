@@ -11,13 +11,9 @@ import { DELETE_BOOK, DELETE_AUTHOR } from "../queries";
 export const Actions = ({
 	entry,
 	refetch,
-	isLastElement,
-	updatePage,
 }: {
 	entry: Author | Book;
 	refetch: () => void;
-	isLastElement: boolean;
-	updatePage: () => void;
 }) => {
 	const author = isAuthor(entry);
 	const [showInfo, setShowInfo] = useState(false);
@@ -29,10 +25,6 @@ export const Actions = ({
 	);
 
 	const handleDelete = async (id: string) => {
-		if (isLastElement) {
-			updatePage();
-		}
-
 		await deleteResource({ variables: { id } });
 		refetch();
 	};

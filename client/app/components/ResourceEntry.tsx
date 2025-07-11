@@ -5,13 +5,9 @@ import { isAuthor } from "../utils";
 export const ResourceEntry = ({
 	resource,
 	refetch,
-	isLastElement,
-	updatePage,
 }: {
 	resource: Author | Book;
 	refetch: () => void;
-	isLastElement: boolean;
-	updatePage: () => void;
 }) => {
 	const author = isAuthor(resource);
 	return (
@@ -29,21 +25,11 @@ export const ResourceEntry = ({
 					</p>
 				</div>
 				<div className="hidden md:block ml-auto">
-					<Actions
-						entry={resource}
-						refetch={refetch}
-						isLastElement={isLastElement}
-						updatePage={updatePage}
-					/>
+					<Actions entry={resource} refetch={refetch} />
 				</div>
 			</div>
 			<div className="md:hidden w-full flex justify-center mt-2">
-				<Actions
-					entry={resource}
-					refetch={refetch}
-					isLastElement={isLastElement}
-					updatePage={updatePage}
-				/>
+				<Actions entry={resource} refetch={refetch} />
 			</div>
 		</div>
 	);

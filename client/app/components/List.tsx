@@ -38,6 +38,13 @@ export const List = ({
 		setPage(1);
 	}, [selection, filters]);
 
+	// When the last element on page is deleted set page to 1
+	useEffect(() => {
+		if (page > Math.ceil(listData?.count / LIST_CONFIG.LIMIT)) {
+			setPage(1);
+		}
+	}, [listData, page]);
+
 	// Handles the 12 hour timeout for the token
 	if (error) {
 		setTimeout(() => {
@@ -76,8 +83,6 @@ export const List = ({
 							) as typeof resource
 						}
 						refetch={refetch}
-						isLastElement={listData.items.length === 1}
-						updatePage={() => setPage(Math.max(1, page - 1))}
 					/>
 				))}
 			</div>
