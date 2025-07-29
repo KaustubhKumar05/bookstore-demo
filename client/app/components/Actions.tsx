@@ -10,9 +10,11 @@ import { DELETE_BOOK, DELETE_AUTHOR } from "../queries";
 
 export const Actions = ({
 	entry,
+	resourceType,
 	refetch,
 }: {
 	entry: Author | Book;
+	resourceType: string;
 	refetch: () => void;
 }) => {
 	const author = isAuthor(entry);
@@ -47,20 +49,19 @@ export const Actions = ({
 			</div>
 
 			<InfoDialog
-				title={`${author ? "Author" : "Book"} Details`}
+				title={`${resourceType} Details`}
 				resource={entry}
 				open={showInfo}
 				setOpen={setShowInfo}
 			/>
 			<EditDialog
-				title={`Edit ${author ? "Author" : "Book"} Details`}
+				title={`Edit ${resourceType} Details`}
 				resource={entry}
 				open={showEditForm}
 				setOpen={setShowEditForm}
-				onConfirm={() => refetch()}
 			/>
 			<DeleteDialog
-				title={`Delete ${author ? "Author" : "Book"}?`}
+				title={`Delete ${resourceType}?`}
 				resource={entry}
 				open={showDeleteConfirmation}
 				setOpen={setShowDeleteConfirmation}

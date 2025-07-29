@@ -10,6 +10,7 @@ export const ResourceEntry = ({
 	refetch: () => void;
 }) => {
 	const author = isAuthor(resource);
+	const resourceType = author ? "Author" : "Book";
 	return (
 		<div className="bg-gray-800 shadow px-5 py-3 my-2 rounded">
 			<div className="flex items-center gap-5 w-full" key={resource.id}>
@@ -18,18 +19,18 @@ export const ResourceEntry = ({
 					<p className="font-semibold text-lg">
 						{author ? (resource as Author).name : (resource as Book).title}
 					</p>
-					<p className="">
+					<p>
 						{author
 							? (resource as Author).biography
 							: (resource as Book).description}
 					</p>
 				</div>
 				<div className="hidden md:block ml-auto">
-					<Actions entry={resource} refetch={refetch} />
+					<Actions entry={resource} refetch={refetch} resourceType={ resourceType} />
 				</div>
 			</div>
 			<div className="md:hidden w-full flex justify-center mt-2">
-				<Actions entry={resource} refetch={refetch} />
+				<Actions entry={resource} refetch={refetch} resourceType={ resourceType} />
 			</div>
 		</div>
 	);

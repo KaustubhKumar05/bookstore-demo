@@ -12,20 +12,18 @@ export const EditDialog = ({
 	open,
 	setOpen,
 	title,
-	onConfirm,
 }: {
 	resource: Book | Author;
 	open: boolean;
 	setOpen: (state: boolean) => void;
 	title: string;
-	onConfirm: () => void;
 }) => {
 	const author = isAuthor(resource);
 	const [enableSubmit, setEnableSubmit] = useState(false);
 	const [formData, setFormData] = useState(resource);
 
 	const [updateResource, { loading }] = useMutation(
-		author ? UPDATE_AUTHOR : UPDATE_BOOK
+		author ? UPDATE_AUTHOR : UPDATE_BOOK, 
 	);
 
 	const handleUpdate = async (id: string) => {
@@ -33,7 +31,6 @@ export const EditDialog = ({
 		["id", "__typename"].forEach((key) => delete input[key]);
 
 		await updateResource({ variables: { id, input } });
-		onConfirm();
 	};
 
 	const { authorOptions } = useAuthorList(author);

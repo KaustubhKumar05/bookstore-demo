@@ -1,3 +1,5 @@
+'use client';
+
 import { Author, Book, DraftAuthor, DraftBook, ResourceType } from "./types";
 import { isEqual } from "lodash";
 

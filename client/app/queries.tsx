@@ -44,6 +44,7 @@ export const DELETE_AUTHOR = gql`
 export const UPDATE_AUTHOR = gql`
 	mutation UpdateAuthor($id: ID!, $input: AuthorInput!) {
 		updateAuthor(id: $id, input: $input) {
+			id
 			name
 			biography
 			bornDate
@@ -54,6 +55,7 @@ export const UPDATE_AUTHOR = gql`
 export const UPDATE_BOOK = gql`
 	mutation UpdateBook($id: ID!, $input: BookInput!) {
 		updateBook(id: $id, input: $input) {
+			id
 			title
 			description
 			publishedDate
@@ -105,25 +107,30 @@ export const GET_REVIEWS = gql`
 		}
 	}
 `;
+export const AUTH_PAYLOAD = gql`
+  fragment AuthPayload on AuthPayload {
+    token
+    user {
+      username
+    }
+  }
+`;
 
 export const SIGNUP = gql`
-	mutation Signup($input: AuthInput!) {
-		signUp(input: $input) {
-			token
-			user {
-				username
-			}
-		}
-	}
+  mutation Signup($input: AuthInput!) {
+    signUp(input: $input) {
+      ...AuthPayload
+    }
+  }
+  ${AUTH_PAYLOAD}
 `;
 
 export const LOGIN = gql`
-	mutation Login($input: AuthInput!) {
-		logIn(input: $input) {
-			token
-			user {
-				username
-			}
-		}
-	}
+  mutation Login($input: AuthInput!) {
+    logIn(input: $input) {
+      ...AuthPayload
+    }
+  }
+  ${AUTH_PAYLOAD}
 `;
+
